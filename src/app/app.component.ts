@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
+// import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+// import { AngularFireAuth } from '@angular/fire/auth';
+
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 
@@ -12,16 +15,12 @@ import * as firebase from 'firebase/app';
 
 export class AppComponent {
   title = 'kotlinbarcamp';
-  items: AngularFirestoreCollection<any[]>;
+  items: Observable<any[]>;
   user: Observable<firebase.User>;
   msgVal = '';
 
-  constructor(public afAuth: AngularFireAuth, public af: AngularFirestore) {
-    this.items = af.collection<any[]>('/questions', {
-      query: {
-        limitToLast: 50
-      }
-    });
+  constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
+    this.items = af.list('/questions').valueChanges();
 
     this.user = this.afAuth.authState;
 
@@ -36,7 +35,7 @@ export class AppComponent {
   }
 
   Send(desc: string) {
-      this.items.push({ message: desc});
+      this.af.list('/questions').push({question: desc});
       this.msgVal = '';
   }
 

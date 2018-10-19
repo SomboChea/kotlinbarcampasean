@@ -2,8 +2,8 @@
   <button (click)="login()" *ngIf="!(user | async)?.uid">Anonymous Login</button>
   <button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button>
 
-  <input type="text" id="message" *ngIf="(user | async)?.uid" placeholder="What is it that you do?" (keyup.enter)="Send($event.target.value)" [(ngModel)]="msgVal" />
+  <input type="text" id="question" *ngIf="(user | async)?.uid" placeholder="Let's question in?" (keyup.enter)="Send($event.target.value)" required [(ngModel)]="msgVal" />
   <div id="details-container">
-      <p *ngFor="let item of items | async"><img src="../assets/images/pin.svg">{{item.message}}</p>
+      <p *ngFor="let item of items | async"><img src="./src/kotlin.png" width="30px" height="30px">{{item.question}}</p>
   </div>
 </div>
