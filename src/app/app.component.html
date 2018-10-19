@@ -1,4 +1,5 @@
-<div class="row columns">
+<mat-toolbar color="primary">Live Kotlin Questions</mat-toolbar>
+<div class="row columns container">
   <button (click)="login()" *ngIf="!(user | async)?.uid">Anonymous Login</button>
   <button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button>
 

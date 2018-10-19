@@ -1,11 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 body {
     background-color:#EBEBEB;
-    padding-top: 5em;
+    padding-top: 0em;
 }
 * {
     font-family: 'Raleway';
 }
+
+.container {
+    padding-top: 2em;
+}
+
 button {
     background:#008FEF;
     color:white;
